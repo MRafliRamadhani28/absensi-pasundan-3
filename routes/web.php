@@ -41,6 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/cms/user/{id}/update-active', [UserController::class, 'updateActive']);
     Route::delete('/cms/user/{id}', [UserController::class, 'delete']);
 
+    Route::get('/cms/user', [GuruController::class, 'index'])->name('cmsMasterGuru');
+
     Route::get('/cms/blank-space', function () {
         return view('cms.blank-space');
     })->name('cmsBlankSpace');

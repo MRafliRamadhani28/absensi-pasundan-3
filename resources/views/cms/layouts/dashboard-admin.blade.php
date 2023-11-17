@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>@yield('title')Mana Dashboard</title>
+    <title>@yield('title')SMA 3 PASUNDAN</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,9 +23,9 @@
             <main>
                 @yield('content')
             </main>
-            <p class="my-10 text-sm text-center text-gray-500">
+            {{-- <p class="my-10 text-sm text-center text-gray-500">
                 &copy; 2019-2023 <a href="https://flowbite.com/" class="hover:underline" target="_blank">Flowbite.com</a>. All rights reserved.
-            </p>
+            </p> --}}
         </div>
     </div>
     <div id="overflowLoading" class="fixed left-0 right-0 z-100 items-center justify-center overflow-x-hidden overflow-y-auto md:inset-0 h-modal sm:h-full flex bg-gray-900 bg-opacity-80 dark:bg-opacity-80 hidden">

@@ -54,5 +54,31 @@ return [
 				]
 			],
 		],
-	]
+	],
+	[
+		'code'		 => 'master',
+		'name'		 => "Master",
+		'label'		 => "master",
+		'icon'		 => "cog",
+		'route_name' => "",
+		'module' 	 => [],
+		'child'      => [
+			[
+				'code'		 => "master-guru",
+				'name'		 => "Guru",
+				'label'		 => "masterGuru",
+				'icon'		 => "",
+				'route_name' => "cmsMasterGuru",
+				'module' 	 => [
+					'code' => 'master-guru',
+					'task' => [
+						[
+							'code' => 'add',
+							'name' => 'Add'
+						]
+					]
+				]
+			],
+		],
+	],
 ];
