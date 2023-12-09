@@ -10,16 +10,20 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
-    protected $redirectTo = '/cms/dashboard';
+    public function __construct()
+    {
+        $this->middleware('guest:web')->only('showLogin', 'login');
+        $this->middleware('guest:user')->only('showLoginUser', 'loginUser');
+    }
 
-    /**
-     * Display the login view.
-     *
-     * @return \Illuminate\View\View
-     */
     public function showLogin()
     {
         return view('cms.auth.login');
+    }
+
+    public function showLoginUser()
+    {
+        return view('cms.auth.login-user');
     }
 
     /**
@@ -30,11 +34,20 @@ class AuthenticatedSessionController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        $request->authenticate();
+        $request->authenticate('web');
 
         $request->session()->regenerate();
 
-        return redirect()->intended($this->redirectTo);
+        return redirect()->intended('/cms/dashboard');
+    }
+
+    public function loginUser(LoginRequest $request)
+    {
+        $request->authenticate('user');
+
+        $request->session()->regenerate();
+
+        return redirect()->intended('/dashboard');
     }
 
     /**
@@ -51,6 +64,17 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/cms/login');
+    }
+
+    public function logoutUser(Request $request)
+    {
+        Auth::guard('user')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }

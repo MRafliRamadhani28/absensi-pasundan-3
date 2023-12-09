@@ -19,7 +19,7 @@
                             <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            <a href="#" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">User Levels</a>
+                            <a href="#" class="ml-1 text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Master Guru</a>
                         </div>
                     </li>
                     <li>
@@ -32,7 +32,7 @@
                     </li>
                 </ol>
             </nav>
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All User Levels</h1>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Master Guru</h1>
         </div>
         <div class="sm:flex">
             <div class="items-center hidden mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700">
@@ -88,7 +88,7 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                        @if($paginationData['total'] > 0)
+                        {{-- @if($paginationData['total'] > 0)
                         @foreach($listData as $data)
                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                             <td class="w-4 p-4">
@@ -129,14 +129,17 @@
                         <tr class="">
                             <td class="p-4 text-center text-gray-900 whitespace-nowrap dark:text-white" colspan="5">No Data</td>
                         </tr>
-                        @endif
+                        @endif --}}
+                        <tr class="">
+                            <td class="p-4 text-center text-gray-900 whitespace-nowrap dark:text-white" colspan="5">No Data</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-<div class="sticky bottom-0 right-0 items-center w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-between dark:bg-gray-800 dark:border-gray-700">
+{{-- <div class="sticky bottom-0 right-0 items-center w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-between dark:bg-gray-800 dark:border-gray-700">
     <div class="flex items-center mb-4 sm:mb-0">
         <a href="{{ $paginationData['prev_page_url'] ?? '#' }}" class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
             <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -164,7 +167,7 @@
             </svg>
         </a>
     </div>
-</div>
+</div> --}}
 
 <div id="addUserLevelModal" tabindex="-1" aria-hidden="true" class="modal">
     <div class="modal-dialog modal-2xl">
@@ -189,13 +192,13 @@
                             <label for="addParentUserLevel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parent User Level</label>
                             <select id="addParentUserLevel" name="parent_user_level_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option value="" selected>Choose a parent user level</option>
-                                @foreach($listUserLevel as $key => $group)
+                                {{-- @foreach($listUserLevel as $key => $group)
                                 <optgroup label="Level {{ $key }}">
                                     @foreach($group as $userlevel)
                                     <option value="{{ $userlevel->id }}">{{ $userlevel->name }}</option>
                                     @endforeach
                                 </optgroup>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                         </div>
                     </div>
@@ -239,13 +242,13 @@
                             <label for="editParentUserLevel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parent User Level</label>
                             <select id="editParentUserLevel" name="parent_user_level_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option value="" selected>Choose a parent user level</option>
-                                @foreach($listUserLevel as $key => $group)
+                                {{-- @foreach($listUserLevel as $key => $group)
                                 <optgroup label="Level {{ $key }}">
                                     @foreach($group as $userlevel)
                                     <option value="{{ $userlevel->id }}">{{ $userlevel->name }}</option>
                                     @endforeach
                                 </optgroup>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                         </div>
                     </div>

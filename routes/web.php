@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Cms\GuruController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Cms\UserController;
 use App\Http\Controllers\Cms\UserLevelController;
@@ -18,13 +19,21 @@ use App\Http\Controllers\Cms\UserLevelController;
 require __DIR__.'/auth.php';
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    echo "Hello";
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:user')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('absen');
+    });
+    // Route::get('/absen', [GuruController::class, 'index'])->name('absen');
+});
+
+Route::middleware('auth:web')->group(function () {
     Route::get('/cms/dashboard', function () {
         return view('cms.dashboard');
-    })->name('cmsDashboard');
+    })->name('cmsDashboard')->middleware(['cms.access:dashboard,hak-akses']);
     
     Route::get('/cms/user-level', [UserLevelController::class, 'index'])->name('cmsUserLevel');
     Route::post('/cms/user-level', [UserLevelController::class, 'store']);
@@ -41,7 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/cms/user/{id}/update-active', [UserController::class, 'updateActive']);
     Route::delete('/cms/user/{id}', [UserController::class, 'delete']);
 
-    Route::get('/cms/user', [GuruController::class, 'index'])->name('cmsMasterGuru');
+    Route::get('/cms/master-guru', [GuruController::class, 'index'])->name('cmsMasterGuru');
 
     Route::get('/cms/blank-space', function () {
         return view('cms.blank-space');
