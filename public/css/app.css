@@ -1566,6 +1566,9 @@ input:checked + .toggle-bg {
 .w-1\/2 {
   width: 50%;
 }
+.w-1\/4 {
+  width: 25%;
+}
 .w-10 {
   width: 2.5rem;
 }
@@ -1628,6 +1631,9 @@ input:checked + .toggle-bg {
 }
 .flex-shrink-0 {
   flex-shrink: 0;
+}
+.flex-wrap {
+  flex-wrap: wrap;
 }
 .shrink-0 {
   flex-shrink: 0;
@@ -2718,12 +2724,28 @@ input:checked + .toggle-bg {
     width: auto;
   }
 
+  .sm\:w-1\/2 {
+    width: 50%;
+  }
+
+  .sm\:w-1\/4 {
+    width: 25%;
+  }
+
+  .sm\:w-auto {
+    width: auto;
+  }
+
   .sm\:items-center {
     align-items: center;
   }
 
   .sm\:justify-center {
     justify-content: center;
+  }
+
+  .sm\:justify-around {
+    justify-content: space-around;
   }
 
   .sm\:justify-between {
