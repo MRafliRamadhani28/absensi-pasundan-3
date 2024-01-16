@@ -51,6 +51,9 @@ Route::middleware('auth:web')->group(function () {
     Route::delete('/cms/user/{id}', [UserController::class, 'delete']);
 
     Route::get('/cms/master-guru', [GuruController::class, 'index'])->name('cmsMasterGuru');
+    Route::post('/cms/master-guru', [GuruController::class, 'store']);
+    Route::get('/cms/master-guru/{id}', [GuruController::class, 'detail']);
+    Route::delete('/cms/master-guru/delete/{id}', [GuruController::class, 'delete']);
 
     Route::get('/cms/blank-space', function () {
         return view('cms.blank-space');

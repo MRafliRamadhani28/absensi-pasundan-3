@@ -44,7 +44,7 @@
                 </form>
             </div>
             <div class="flex items-center ml-auto space-x-2 sm:space-x-3">
-                <button type="button" data-mana-modal-toggle="addUserLevelModal" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <button type="button" data-mana-modal-toggle="addGuruModal" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
                     </svg>
@@ -67,20 +67,23 @@
                 <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
                     <thead class="bg-gray-100 dark:bg-gray-700">
                         <tr>
-                            <th scope="col" class="p-4">
-                                <div class="flex items-center">
-                                    <input id="checkbox-all" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="checkbox-all" class="sr-only">checkbox</label>
-                                </div>
+                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                #
+                            </th>
+                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                NIP
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                 Name
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                Parent User Level
+                                Jenis Kelamin
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                Created At
+                                No.Telp
+                            </th>
+                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                Email
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                 Actions
@@ -88,26 +91,18 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                        {{-- @if($paginationData['total'] > 0)
-                        @foreach($listData as $data)
+                        @if($paginationData['total'] > 0)
+                        @foreach($dataGuru as $data)
                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                            <td class="w-4 p-4">
-                                <div class="flex items-center">
-                                    <input id="checkbox-1" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="checkbox-1" class="sr-only">checkbox</label>
-                                </div>
-                            </td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $data->name }}</td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $data->parent_name ? : "-" }}</td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ date("d M Y H:i", strtotime($data->created_at)) ? : "-" }}</td>
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $loop->iteration }}</td>
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $data->nip }}</td>
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ ucwords($data->nama) }}</td>
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $data->getGender()['jenis_kelamin'] }}</td>
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $data->no_telp ?: "-" }}</td>
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $data->email ?: "-" }}</td>
+                            {{-- <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ date("d M Y H:i", strtotime($data->created_at)) ? : "-" }}</td> --}}
                             <td class="p-4 space-x-2 whitespace-nowrap">
                                 <div>
-                                    <a href="/cms/user-level/{{ $data->id }}/setting" class="btn btn-info btn-sm inline-flex items-center">
-                                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
-                                        </svg>
-                                        Setting
-                                    </a>
                                     <button type="button" onclick="edit({{ $data->id }})" class="btn btn-warning btn-sm inline-flex items-center">
                                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
@@ -127,19 +122,16 @@
                         @endforeach
                         @else
                         <tr class="">
-                            <td class="p-4 text-center text-gray-900 whitespace-nowrap dark:text-white" colspan="5">No Data</td>
+                            <td class="p-4 text-center text-gray-900 whitespace-nowrap dark:text-white" colspan="7">No Data</td>
                         </tr>
-                        @endif --}}
-                        <tr class="">
-                            <td class="p-4 text-center text-gray-900 whitespace-nowrap dark:text-white" colspan="5">No Data</td>
-                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-{{-- <div class="sticky bottom-0 right-0 items-center w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-between dark:bg-gray-800 dark:border-gray-700">
+<div class="sticky bottom-0 right-0 items-center w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-between dark:bg-gray-800 dark:border-gray-700">
     <div class="flex items-center mb-4 sm:mb-0">
         <a href="{{ $paginationData['prev_page_url'] ?? '#' }}" class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
             <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -167,62 +159,70 @@
             </svg>
         </a>
     </div>
-</div> --}}
+</div>
 
-<div id="addUserLevelModal" tabindex="-1" aria-hidden="true" class="modal">
+<div id="addGuruModal" tabindex="-1" aria-hidden="true" class="modal">
     <div class="modal-dialog modal-2xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">
-                    Add User Level
+                    Add Data Guru
                 </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-mana-modal-toggle="addUserLevelModal">
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-mana-modal-toggle="addGuruModal">
                     @includeif('components.icons.close')
                 </button>
             </div>
             <div class="modal-body">
-                <form id="formAddUserLevel">
+                <form id="formAddGuru">
                     <div class="">
                         {{ csrf_field() }}
                         <div class="mb-4">
-                            <label for="addName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name <span class="text-red-500">*</span></label>
-                            <input type="text" name="name" id="addName" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name User Level" required>
+                            <label for="addNip" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIP <span class="text-red-500">*</span></label>
+                            <input type="text" name="nip" id="addNip" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="NIP Guru" required>
                         </div>
                         <div class="mb-4">
-                            <label for="addParentUserLevel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parent User Level</label>
-                            <select id="addParentUserLevel" name="parent_user_level_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option value="" selected>Choose a parent user level</option>
-                                {{-- @foreach($listUserLevel as $key => $group)
-                                <optgroup label="Level {{ $key }}">
-                                    @foreach($group as $userlevel)
-                                    <option value="{{ $userlevel->id }}">{{ $userlevel->name }}</option>
-                                    @endforeach
-                                </optgroup>
-                                @endforeach --}}
-                            </select>
+                            <label for="addName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name <span class="text-red-500">*</span></label>
+                            <input type="text" name="nama" id="addName" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nama Guru" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="addEmail" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email <span class="text-red-500">*</span></label>
+                            <input type="text" name="email" id="addEmail" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="addGender" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Kelamin <span class="text-red-500">*</span></label>
+                            <div class="flex flex-wrap sm:justify-around w-full sm:w-1/2">
+                                <div class="mb-3 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full sm:w-auto p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <input checked id="bordered-radio-1" type="radio" value="l" name="jenis_kelamin" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="bordered-radio-1" class="w-full ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Laki-laki</label>
+                                </div>
+                                <div class="mb-3 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full sm:w-auto p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <input id="bordered-radio-2" type="radio" value="p" name="jenis_kelamin" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="bordered-radio-2" class="w-full ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Perempuan</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" onclick="add()">Add User Level</button>
+                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" onclick="add()">Add Guru</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Edit User Modal -->
-<div id="editUserLevelModal" class="modal">
+<div id="editGuruModal" class="modal">
     <div class="modal-dialog modal-2xl">
         <!-- Modal content -->
         <div class="modal-content">
             <!-- Modal header -->
             <div class="modal-header">
                 <h3 class="modal-title">
-                    Edit User Level
+                    Edit Data Guru
                 </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-mana-modal-toggle="editUserLevelModal">
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-mana-modal-toggle="editGuruModal">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                     </svg>
@@ -230,26 +230,17 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                <form id="formEditUserLevel">
+                <form id="formEditGuru">
                     <div class="">
                         {{ csrf_field() }}
                         <input type="hidden" name="id" id="editId">
                         <div class="mb-4">
-                            <label for="editName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name <span class="text-red-500">*</span></label>
-                            <input type="text" name="name" id="editName" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name User Level" required>
+                            <label for="editNip" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIP <span class="text-red-500">*</span></label>
+                            <input type="text" name="name" id="editNip" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="NIP" required>
                         </div>
                         <div class="mb-4">
-                            <label for="editParentUserLevel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parent User Level</label>
-                            <select id="editParentUserLevel" name="parent_user_level_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option value="" selected>Choose a parent user level</option>
-                                {{-- @foreach($listUserLevel as $key => $group)
-                                <optgroup label="Level {{ $key }}">
-                                    @foreach($group as $userlevel)
-                                    <option value="{{ $userlevel->id }}">{{ $userlevel->name }}</option>
-                                    @endforeach
-                                </optgroup>
-                                @endforeach --}}
-                            </select>
+                            <label for="editName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name <span class="text-red-500">*</span></label>
+                            <input type="text" name="name" id="editName" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name" required>
                         </div>
                     </div>
                 </form>
@@ -262,14 +253,14 @@
     </div>
 </div>
 
-<!-- Delete User Modal -->
-<div class="modal" id="deleteUserLevelModal">
+<!-- Delete Guru Modal -->
+<div class="modal" id="deleteGuruModal">
     <div class="modal-dialog modal-popup">
         <!-- Modal content -->
         <div class="modal-content">
             <!-- Modal header -->
             <div class="modal-header">
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-mana-modal-toggle="deleteUserLevelModal">
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-mana-modal-toggle="deleteGuruModal">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                     </svg>
@@ -280,11 +271,11 @@
                 <svg class="w-16 h-16 mx-auto text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                <h3 class="mt-5 mb-6 text-lg text-gray-500 dark:text-gray-400">Are you sure you want to delete this user level?</h3>
+                <h3 class="mt-5 mb-6 text-lg text-gray-500 dark:text-gray-400">Are you sure you want to delete this data guru?</h3>
                 <button type="button" id="buttonDelete" data-id="" onclick="deleteAction()" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2 dark:focus:ring-red-800">
                     Yes, I'm sure
                 </button>
-                <a href="#" class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700" data-mana-modal-toggle="deleteUserLevelModal">
+                <a href="#" class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700" data-mana-modal-toggle="deleteGuruModal">
                     No, cancel
                 </a>
             </div>
@@ -295,7 +286,7 @@
 @section('script')
 <script>
     function add() {
-        var form = document.forms["formAddUserLevel"];
+        var form = document.forms["formAddGuru"];
 
         var formData = new FormData(form);
         var formDataObj = new Object;
@@ -304,10 +295,10 @@
         loading(true)
         axios({
                 method: 'post',
-                url: '/cms/user-level',
+                url: '/cms/master-guru',
                 data: formDataObj
             })
-            .then(function(response) {
+            .then(function(response) {  
                 if (response.data.status == "OK") {
                     location.reload();
                 }
@@ -335,24 +326,16 @@
 
         axios({
                 method: 'get',
-                url: '/cms/user-level/' + id,
+                url: '/cms/master-guru/' + id,
                 responseType: 'stream'
             })
             .then(function(response) {
                 if (response.data.status == "OK") {
                     document.getElementById("editId").value = response.data.results.id;
-                    document.getElementById("editName").value = response.data.results.name;
-                    document.getElementById("editParentUserLevel").value = response.data.results.parent_user_level_id;
+                    document.getElementById("editNip").value = response.data.results.nip;
+                    document.getElementById("editName").value = response.data.results.nama;
 
-                    document.querySelectorAll("#editParentUserLevel option").forEach(opt => {
-                        if (opt.value == response.data.results.id) {
-                            opt.disabled = true;
-                        } else {
-                            opt.disabled = false;
-                        }
-                    });
-
-                    toggleModal('editUserLevelModal');
+                    toggleModal('editGuruModal');
 
                     loading(false)
                 }
@@ -360,7 +343,7 @@
     }
 
     function update() {
-        var form = document.forms["formEditUserLevel"];
+        var form = document.forms["formEditGuru"];
 
         var formData = new FormData(form);
         var formDataObj = new Object;
@@ -369,7 +352,7 @@
         loading(true)
         axios({
                 method: 'put',
-                url: '/cms/user-level/' + formData.get('id'),
+                url: '/cms/master-guru/' + formData.get('id'),
                 data: formDataObj
             })
             .then(function(response) {
@@ -398,7 +381,7 @@
     function deleteModal(id) {
         document.getElementById("buttonDelete").setAttribute('data-id', id);
 
-        toggleModal("deleteUserLevelModal");
+        toggleModal("deleteGuruModal");
 
         return false;
     }
@@ -409,7 +392,7 @@
         loading(true)
         axios({
                 method: 'delete',
-                url: '/cms/user-level/' + id,
+                url: '/cms/master-guru/delete/' + id,
                 data: {
                     _token: "{{ csrf_token() }}"
                 }

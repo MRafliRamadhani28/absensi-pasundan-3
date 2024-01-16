@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('guru', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('nip', 20);
+            $table->string('nama', 100);
+            $table->enum('jenis_kelamin', ['l', 'p']);
+            $table->date('tgl_lahir');
+            $table->string('no_telp', 15)->nullable();
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->longText('alamat')->nullable();
             $table->timestamps();
         });
     }
