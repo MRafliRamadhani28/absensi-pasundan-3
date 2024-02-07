@@ -56,29 +56,12 @@ return [
 		],
 	],
 	[
-		'code'		 => 'master',
-		'name'		 => "Master",
-		'label'		 => "master",
-		'icon'		 => "cog",
-		'route_name' => "",
+		'code'		 => 'absensi',
+		'name'		 => "Absensi",
+		'label'		 => "absensi",
+		'icon'		 => "attendance",
+		'route_name' => "absensi",
 		'module' 	 => [],
-		'child'      => [
-			[
-				'code'		 => "master-guru",
-				'name'		 => "Guru",
-				'label'		 => "masterGuru",
-				'icon'		 => "",
-				'route_name' => "cmsMasterGuru",
-				'module' 	 => [
-					'code' => 'master-guru',
-					'task' => [
-						[
-							'code' => 'add',
-							'name' => 'Add'
-						]
-					]
-				]
-			],
-		],
+		'child'      => [],
 	],
 ];
