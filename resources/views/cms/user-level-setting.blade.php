@@ -1,7 +1,7 @@
 @extends('cms.layouts.dashboard-admin')
 @section('title', 'User Level Setting | ')
 @section('content')
-<div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
+<div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
     <div class="w-full mb-1">
         <div class="mb-4">
             <nav class="flex mb-5" aria-label="Breadcrumb">
@@ -36,7 +36,7 @@
         </div>
     </div>
 </div>
-<div class="px-4 pt-6">
+<div class="px-4 py-6">
     <div class="grid grid-cols-6 gap-4">
         <div class="col-span-2">
             <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -79,33 +79,6 @@
                                 @endforeach
                             </div>
                             @endif
-                            @endforeach
-                        </div>
-                        @endif
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-        <div class="col-span-2">
-            <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <h3 class="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-                    General Access
-                </h3>
-                <div>
-                    @foreach ($dataModule as $key => $module)
-                    <div class="mb-4">
-                        <div class="flex items-center mb-2">
-                            <input id="module{{ $key }}" type="checkbox" value="{{ $key }}" data-child-class="module-task-child-{{ $key }}" data-tipe="module-task" data-level="parent" class="setting w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" {{ $module->check == 1 ? 'checked' : '' }}>
-                            <label for="module{{ $key }}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ $module->name }}</label>
-                        </div>
-                        @if (count($module->task) > 0)
-                        <div class="ms-6 mt-2">
-                            @foreach ($module->task as $key2 => $task)
-                            <div class="flex items-center mb-2">
-                                <input id="moduleTask{{ $key.$key2 }}" type="checkbox" value="{{ $task->code }}"  data-parent-id="module{{ $key }}" data-tipe="module-task" data-level="child" class="setting module-task-child-{{ $key }} w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" {{ $task->check == 1 ? 'checked' : '' }}>
-                                <label for="moduleTask{{ $key.$key2 }}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ $task->name }}</label>
-                            </div>
                             @endforeach
                         </div>
                         @endif

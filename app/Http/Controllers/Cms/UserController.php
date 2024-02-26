@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $request->validate([
-            'serach' => 'nullable'
+            'search' => 'nullable'
         ]);
 
         $search = $request->search;

@@ -5,12 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>@yield('title')SMA 3 PASUNDAN</title>
+    <title>@yield('title')SMA PASUNDAN 3 BANDUNG</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://flowbite-admin-dashboard.vercel.app//app.css"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/app.css">
 </head>
 
@@ -23,9 +22,6 @@
             <main>
                 @yield('content')
             </main>
-            {{-- <p class="my-10 text-sm text-center text-gray-500">
-                &copy; 2019-2023 <a href="https://flowbite.com/" class="hover:underline" target="_blank">Flowbite.com</a>. All rights reserved.
-            </p> --}}
         </div>
     </div>
     <div id="overflowLoading" class="fixed left-0 right-0 z-100 items-center justify-center overflow-x-hidden overflow-y-auto md:inset-0 h-modal sm:h-full flex bg-gray-900 bg-opacity-80 dark:bg-opacity-80 hidden">
@@ -47,7 +43,6 @@
         var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
         var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
-        // Change the icons inside the button based on previous settings
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             themeToggleLightIcon.classList.remove('hidden');
         } else {

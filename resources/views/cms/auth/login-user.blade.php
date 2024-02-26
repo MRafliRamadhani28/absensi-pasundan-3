@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Login | Admin CMS</title>
+    <title>Login | User</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,7 +33,7 @@
             <!-- Card -->
             <div class="w-full max-w-xl p-6 space-y-8 sm:p-8 bg-white rounded-lg shadow dark:bg-gray-800">
                 <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
-                    Sign in to CMS
+                    Sign in to User
                 </h2>
                 <form class="mt-8 space-y-6" method="POST">
                     {{ csrf_field() }}
